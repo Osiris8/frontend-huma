@@ -50,7 +50,7 @@ export function DashboardSidebar({
     const storedToken = localStorage.getItem("token");
 
     axios
-      .get("http://localhost:5000/api/auth/me", {
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/auth/me`, {
         headers: {
           Authorization: `Bearer ${storedToken}`,
         },
@@ -64,7 +64,7 @@ export function DashboardSidebar({
       });
 
     axios
-      .get("http://localhost:5000/api/navbar-summaries", {
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/navbar-summaries`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((res) => {
@@ -85,9 +85,12 @@ export function DashboardSidebar({
   const handleDelete = async (id: number) => {
     const storedToken = localStorage.getItem("token");
     try {
-      await axios.delete(`http://localhost:5000/api/chat/${id}`, {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      });
+      await axios.delete(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/chat/${id}`,
+        {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        }
+      );
       setNavMain((prev) => prev.filter((item) => item.id !== id));
     } catch (err) {
       console.error("Delete error:", err);
@@ -98,7 +101,7 @@ export function DashboardSidebar({
     const storedToken = localStorage.getItem("token");
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/chat/${id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/chat/${id}`,
         { title: newTitle },
         { headers: { Authorization: `Bearer ${storedToken}` } }
       );
@@ -139,7 +142,7 @@ export function DashboardSidebar({
           onDelete={handleDelete}
           onRename={handleRename}
         />
-       {/* <NavSecondary items={data.navSecondary} className="mt-auto text-4xl" />*/}
+        {/* <NavSecondary items={data.navSecondary} className="mt-auto text-4xl" />*/}
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={user} />
