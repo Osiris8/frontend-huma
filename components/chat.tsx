@@ -109,7 +109,7 @@ export default function Chat() {
     const fetchMessages = async () => {
       try {
         const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/chat/${chatId}/messages`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}api/chat/${chatId}/messages`,
           {
             headers: {
               Authorization: `Bearer ${storedToken}`,
@@ -126,17 +126,16 @@ export default function Chat() {
     const fetchModel = async () => {
       try {
         const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/chat/${chatId}`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}api/chat/${chatId}`,
           {
             headers: {
               Authorization: `Bearer ${storedToken}`,
             },
           }
         );
-        
-      
-        setModel(res.data.model)
-        setAgent(res.data.agent)
+
+        setModel(res.data.model);
+        setAgent(res.data.agent);
       } catch (err) {
         console.error("Error to display a data", err);
       }
@@ -395,7 +394,7 @@ export default function Chat() {
                     <Paperclip className="text-primary size-5" />
                   </label>
                 </PromptInputAction>
-             
+
                 <PromptInputAction tooltip="AI model">
                   <Button variant="outline" className="rounded-full">
                     {model}
