@@ -35,7 +35,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 
 export default function PromptInputWithActions() {
   const [input, setInput] = useState("");
@@ -43,8 +43,9 @@ export default function PromptInputWithActions() {
   const [files, setFiles] = useState<File[]>([]);
   const uploadInputRef = useRef<HTMLInputElement>(null);
   const [selectedAgent, setSelectedAgent] = useState<string>("tutor");
-  const models =
-    process.env.NEXT_PUBLIC_AI_MODEL?.split(",") || ["openai/gpt-oss-20b"];
+  const models = process.env.NEXT_PUBLIC_AI_MODEL?.split(",") || [
+    "openai/gpt-oss-20b",
+  ];
 
   const [selectedModel, setSelectedModel] = useState(models[0]);
 
@@ -57,55 +58,61 @@ export default function PromptInputWithActions() {
     const storedToken = localStorage.getItem("token");
     const storedInput = localStorage.setItem("storedInput", input);
     let finalPrompt = input.trim();
-    if (input.trim() || files.length > 0) {
-      if (files && files.length > 0) {
-        const formData = new FormData();
-        formData.append("file", files[0]);
 
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}api/upload`,
-          {
-            method: "POST",
-            body: formData,
-          }
-        );
+    if (files && files.length > 0) {
+      const formData = new FormData();
+      formData.append("file", files[0]);
 
-        if (!res.ok) throw new Error("Error to upload the file");
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
-        const data = await res.json();
+      if (!res.ok) throw new Error("Error to upload the file");
 
-        finalPrompt = `${input.trim()}\n\n---\nhere my doc :\n${data.text}`;
-      }
+      const data = await res.json();
 
-      setIsLoading(true);
-      setInput("");
-      setFiles([]);
-      try {
-        const res = await axios.post(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}api/chat`,
-          {
+      finalPrompt = `${input.trim()}\n\n---\nhere my doc :\n${data.text}`;
+    }
+
+    setIsLoading(true);
+    setInput("");
+    setFiles([]);
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/chat`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
             title: finalPrompt,
             model: selectedModel,
             agent: selectedAgent,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${storedToken}`,
-            },
-          }
-        );
+          }),
+        }
+      );
 
-        const chatId = res.data.chat_id;
-        setIsLoading(false);
-        router.push(`/chat/${chatId}`);
-      } catch (error) {
-        console.error(error);
-        redirect("/login");
-      } finally {
-        setIsLoading(false);
-        setInput("");
-        setFiles([]);
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
       }
+
+      const data = await res.json();
+      const chatId = data.chat_id;
+      setIsLoading(false);
+      router.push(`/chat/${chatId}`);
+    } catch (error) {
+      console.error(error);
+      redirect("/login");
+    } finally {
+      setIsLoading(false);
+      setInput("");
+      setFiles([]);
     }
   };
 
@@ -184,24 +191,24 @@ export default function PromptInputWithActions() {
                 <Paperclip className="text-primary size-5" />
               </label>
             </PromptInputAction>
-           
-         <PromptInputAction tooltip="Select a Model">
-         <Select value={selectedModel} onValueChange={setSelectedModel}>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select a Model" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>Models</SelectLabel>
-            {models.map((m) => (
-              <SelectItem key={m} value={m}>
-                {m}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-         </PromptInputAction>
+
+            <PromptInputAction tooltip="Select a Model">
+              <Select value={selectedModel} onValueChange={setSelectedModel}>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Select a Model" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Models</SelectLabel>
+                    {models.map((m) => (
+                      <SelectItem key={m} value={m}>
+                        {m}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </PromptInputAction>
           </div>
           <PromptInputAction
             tooltip={isLoading ? "Stop generation" : "Send message"}
@@ -223,20 +230,19 @@ export default function PromptInputWithActions() {
       </PromptInput>
       <div className="flex flex-row flex-wrap items-center justify-center m-8 p-5 gap-2">
         <PromptSuggestion onClick={() => setInput("Summarize")}>
-        <NotepadText />Summarize
+          <NotepadText />
+          Summarize
         </PromptSuggestion>
         <PromptSuggestion onClick={() => setInput("Translate")}>
-        <Languages /> Translate
+          <Languages /> Translate
         </PromptSuggestion>
-        <PromptSuggestion
-          onClick={() => setInput("Learn")}
-        >
-         <Book /> Learn
+        <PromptSuggestion onClick={() => setInput("Learn")}>
+          <Book /> Learn
         </PromptSuggestion>
         <PromptSuggestion onClick={() => setInput("Code")}>
-        <Code />Code
+          <Code />
+          Code
         </PromptSuggestion>
-
       </div>
     </div>
   );

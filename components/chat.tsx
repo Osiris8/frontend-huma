@@ -108,36 +108,52 @@ export default function Chat() {
 
     const fetchMessages = async () => {
       try {
-        const res = await axios.get(
+        const res = await fetch(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}api/chat/${chatId}/messages`,
           {
+            method: "GET",
             headers: {
               Authorization: `Bearer ${storedToken}`,
+              "Content-Type": "application/json",
             },
           }
         );
 
-        setChatMessages(res.data);
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+
+        const data = await res.json();
+        setChatMessages(data);
+        console.log(data);
       } catch (err) {
-        console.error("Error to display a data", err);
+        console.error("Error fetching data:", err);
         redirect("/login");
       }
     };
+
     const fetchModel = async () => {
       try {
-        const res = await axios.get(
+        const res = await fetch(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}api/chat/${chatId}`,
           {
+            method: "GET",
             headers: {
               Authorization: `Bearer ${storedToken}`,
+              "Content-Type": "application/json",
             },
           }
         );
 
-        setModel(res.data.model);
-        setAgent(res.data.agent);
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+
+        const data = await res.json();
+        setModel(data.model);
+        setAgent(data.agent);
       } catch (err) {
-        console.error("Error to display a data", err);
+        console.error("Error fetching data:", err);
       }
     };
 
