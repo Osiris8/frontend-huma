@@ -105,8 +105,7 @@ export default function PromptInputWithActions() {
       const data = await res.json();
       const chatId = data.chat_id;
       setIsLoading(false);
-      //router.push(`/chat/${chatId}`);
-      window.location.href = `/chat/${chatId}`;
+      router.push(`/chat/${chatId}`);
     } catch (error) {
       console.error(error);
       redirect("/login");
