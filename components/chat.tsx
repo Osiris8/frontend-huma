@@ -82,7 +82,7 @@ export default function Chat() {
       setChatMessages((prev) => [
         ...prev,
 
-        { id: -1, sender: "ai", content: "" },
+        { id: 0, sender: "ai", content: "" },
       ]);
 
       if (reader) {
