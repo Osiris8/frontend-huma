@@ -410,7 +410,11 @@ export default function Chat() {
                     <Paperclip className="text-primary size-5" />
                   </label>
                 </PromptInputAction>
-
+                <PromptInputAction tooltip="AI Agent type">
+                  <Button variant="outline" className="rounded-full">
+                    {agent} mode
+                  </Button>
+                </PromptInputAction>
                 <PromptInputAction tooltip="AI model">
                   <Button variant="outline" className="rounded-full">
                     {model}

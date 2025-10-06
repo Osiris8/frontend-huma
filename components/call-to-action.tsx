@@ -9,12 +9,18 @@ export default function CallToAction() {
           <h2 className="text-balance text-4xl font-semibold lg:text-5xl">
             Access Now
           </h2>
-          <p className="mt-4">Acces your Smart AI Tutor</p>
+          <p className="mt-4">Acces your Smart AI Companion</p>
 
           <div className="mt-12 flex flex-wrap justify-center gap-4">
             <Button asChild size="lg">
               <Link href="https://github.com/Osiris8/learuma" target="_blank">
                 <span>Get Started</span>
+              </Link>
+            </Button>
+
+            <Button asChild size="lg" variant="outline">
+              <Link href="/">
+                <span>Demo</span>
               </Link>
             </Button>
           </div>

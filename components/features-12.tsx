@@ -5,34 +5,36 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Bot, Code, GraduationCap, Pencil, Stethoscope, TreeDeciduous } from "lucide-react";
+import { Bot, GraduationCap, Stethoscope, TreeDeciduous } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { BorderBeam } from "@/components/magicui/border-beam";
-import code from "@/public/code.png";
-import design from "@/public/design.png";
-import learn from "@/public/learn.png";
+import general_assistant_agent from "@/public/general-assistant-agent.png";
+import tutor_assistant_agent from "@/public/tutor-agent.png";
+import health_assistant_agent from "@/public/health-agent.png";
 import agriculture_agent from "@/public/agriculture-agent.png";
-import { Book } from "lucide-react";
 export default function Features() {
-  type ImageKey = "item-1" | "item-2" | "item-3";
+  type ImageKey = "item-1" | "item-2" | "item-3" | "item-4";
   const [activeItem, setActiveItem] = useState<ImageKey>("item-1");
 
   const images = {
     "item-1": {
-      image: learn,
-      alt: "Learn",
+      image: general_assistant_agent,
+      alt: "General Assistant",
     },
     "item-2": {
-      image: code,
-      alt: "Code",
+      image: tutor_assistant_agent,
+      alt: "Tutor assistant",
     },
     "item-3": {
-      image: design,
-      alt: "Design",
+      image: health_assistant_agent,
+      alt: "Health assistant",
     },
-  
+    "item-4": {
+      image: agriculture_agent,
+      alt: "Agriculture assistant",
+    },
   };
 
   return (
@@ -41,10 +43,12 @@ export default function Features() {
       <div className="mx-auto max-w-5xl space-y-8 px-6 md:space-y-16 lg:space-y-20 dark:[--color-border:color-mix(in_oklab,var(--color-white)_10%,transparent)]">
         <div className="relative z-10 mx-auto max-w-2xl space-y-6 text-center">
           <h2 className="text-balance text-4xl font-semibold lg:text-6xl">
-            Discover Your AI Tutor
+            Discover Your AI Agents
           </h2>
           <p>
-          Your AI mentor to learn anything and faster.
+            Each agent is designed with a unique expertise from learning and
+            health to agriculture and everyday support so you always have the
+            right companion at your side
           </p>
         </div>
 
@@ -58,49 +62,58 @@ export default function Features() {
             <AccordionItem value="item-1">
               <AccordionTrigger>
                 <div className="flex items-center gap-2 text-base">
-                  <Book className="size-4" />
-                  Learn
+                  <Bot className="size-4" />
+                  General Assistant
                 </div>
               </AccordionTrigger>
               <AccordionContent>
-               <ul className="list-disc">
-            <li>Clear, personalized explanations for any concept. </li>
-            <li>Interactive quizzes and practical exercises.</li> 
-            <li> Track your progress with tailored learning paths.</li>
-            </ul>
+                Your Everyday AI Helper. A versatile AI assistant like ChatGPT.
+                Ready to answer any type of question from science to culture to
+                daily life with clarity, precision, and multilingual support.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-2">
               <AccordionTrigger>
                 <div className="flex items-center gap-2 text-base">
-                  <Code className="size-4" />
-                  Code
+                  <GraduationCap className="size-4" />
+                  Tutor AI
                 </div>
               </AccordionTrigger>
               <AccordionContent>
-              <ul className="list-disc">
-            <li>Generate clean and optimized code in seconds.</li>
-            <li>Supports multiple languages (JavaScript, Python, TypeScript, and more).</li> 
-            <li>Step-by-step explanations to help you understand while you build.</li>
-            </ul>
+                Your Interactive Study Partner. An AI tutor that explains
+                concepts step by step, adapts to your level, provides examples,
+                exercises, and feedback. Just like having a personal teacher by
+                your side.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
               <AccordionTrigger>
                 <div className="flex items-center gap-2 text-base">
-                  <Pencil className="size-4" />
-                  Design
+                  <Stethoscope className="size-4" />
+                  Health AI
                 </div>
               </AccordionTrigger>
               <AccordionContent>
-              <ul className="list-disc">
-            <li>Create modern interfaces with reusable components and layouts.</li>
-            <li>Get smart suggestions for colors, typography, and styles.</li> 
-            <li>Generate responsive and accessible designs instantly.</li>
-            </ul>
+                Your Smart Health Companion. An AI medical assistant for both
+                patients and professionals. It explains symptoms, prevention,
+                and treatments in clear language, asks clarifying questions, and
+                provides safe, evidence-based recommendations.
               </AccordionContent>
             </AccordionItem>
-          
+            <AccordionItem value="item-4">
+              <AccordionTrigger>
+                <div className="flex items-center gap-2 text-base">
+                  <TreeDeciduous className="size-4" />
+                  Agriculture AI
+                </div>
+              </AccordionTrigger>
+              <AccordionContent>
+                Your Agronomy Expert. An AI agriculture assistant designed for
+                farmers and agronomy professionals. It gives guidance on crops,
+                soil management, irrigation, and sustainable farming practices,
+                helping you grow smarter and healthier harvests.
+              </AccordionContent>
+            </AccordionItem>
           </Accordion>
 
           <div className="bg-background relative flex overflow-hidden rounded-3xl border p-2">

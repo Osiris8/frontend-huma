@@ -20,6 +20,7 @@ import axios from "axios";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { NavFavorites } from "@/components/nav-favorites";
+import { useRouter } from "next/navigation";
 /*const data = {
   navSecondary: [
     {
@@ -45,6 +46,8 @@ export function DashboardSidebar({
       url: string;
     }[]
   >([]);
+
+  const router = useRouter();
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -92,6 +95,7 @@ export function DashboardSidebar({
         }
       );
       setNavMain((prev) => prev.filter((item) => item.id !== id));
+      router.push("/dashboard");
     } catch (err) {
       console.error("Delete error:", err);
     }
@@ -124,7 +128,7 @@ export function DashboardSidebar({
             <SidebarMenuButton size="lg" asChild>
               <a href="#">
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">Learna AI</span>
+                  <span className="truncate font-medium">Huma AI</span>
                 </div>
               </a>
             </SidebarMenuButton>

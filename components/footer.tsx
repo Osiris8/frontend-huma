@@ -1,16 +1,43 @@
 import Link from "next/link";
 
-
+const links = [
+  {
+    title: "Assistant",
+    href: "#features",
+  },
+  {
+    title: "Education",
+    href: "#features",
+  },
+  {
+    title: "Health",
+    href: "#features",
+  },
+  {
+    title: "Agriculture",
+    href: "#features",
+  },
+];
 
 export default function FooterSection() {
   return (
     <footer className="py-16 md:py-32">
       <div className="mx-auto max-w-5xl px-6">
         <Link href="/" aria-label="go home" className="mx-auto block size-fit">
-          <h1 className="text-3xl font-bold">Learna</h1>
+          <h1 className="text-3xl font-bold">Huma</h1>
         </Link>
 
-       
+        <div className="my-8 flex flex-wrap justify-center gap-6 text-sm">
+          {links.map((link, index) => (
+            <Link
+              key={index}
+              href={link.href}
+              className="text-muted-foreground hover:text-primary block duration-150"
+            >
+              <span>{link.title}</span>
+            </Link>
+          ))}
+        </div>
         <div className="my-8 flex flex-wrap justify-center gap-6 text-sm">
           <Link
             href="https://x.com/migan_osiris"

@@ -42,7 +42,7 @@ export default function PromptInputWithActions() {
   const [isLoading, setIsLoading] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
   const uploadInputRef = useRef<HTMLInputElement>(null);
-  const [selectedAgent, setSelectedAgent] = useState<string>("tutor");
+  const [selectedAgent, setSelectedAgent] = useState<string>("assistant");
   const models = process.env.NEXT_PUBLIC_AI_MODEL?.split(",") || [
     "openai/gpt-oss-20b",
   ];
@@ -190,6 +190,65 @@ export default function PromptInputWithActions() {
                 />
                 <Paperclip className="text-primary size-5" />
               </label>
+            </PromptInputAction>
+
+            <PromptInputAction tooltip="Learn">
+              <Button
+                variant="outline"
+                className={`rounded-full transition-colors duration-500 ease-in-out
+                  
+              ${
+                selectedAgent === "tutor"
+                  ? "bg-blue-500 text-white focus:bg-blue-500 focus:text-white dark:focus:bg-blue-500 dark:focus:text-white dark:bg-blue-500 dark:text-white"
+                  : ""
+              }`}
+                onClick={() => handleClick("tutor")}
+                asChild
+              >
+                <Link href={""}>
+                  <GraduationCap size={18} className="mr-2" />
+                  EduMentor
+                </Link>
+              </Button>
+            </PromptInputAction>
+            <PromptInputAction tooltip="Doctor Assistant">
+              <Button
+                variant="outline"
+                className={`rounded-full transition-colors duration-500 ease-in-out
+                  
+              ${
+                selectedAgent === "health"
+                  ? "bg-blue-500 text-white focus:bg-blue-500 focus:text-white dark:focus:bg-blue-500 dark:focus:text-white dark:bg-blue-500 dark:text-white"
+                  : ""
+              }`}
+                onClick={() => handleClick("health")}
+                asChild
+              >
+                <Link href={""}>
+                  <Stethoscope size={18} />
+                  MediAssist
+                </Link>
+              </Button>
+            </PromptInputAction>
+            <PromptInputAction tooltip="Agriculture and Food">
+              <Button
+                variant="outline"
+                className={`rounded-full transition-colors duration-500 ease-in-out
+                  
+                  
+              ${
+                selectedAgent === "agriculture"
+                  ? "bg-blue-500 text-white focus:bg-blue-500 focus:text-white dark:focus:bg-blue-500 dark:focus:text-white dark:bg-blue-500 dark:text-white"
+                  : ""
+              }`}
+                onClick={() => handleClick("agriculture")}
+                asChild
+              >
+                <Link href={""}>
+                  <TreeDeciduous size={18} />
+                  AgriAssist
+                </Link>
+              </Button>
             </PromptInputAction>
 
             <PromptInputAction tooltip="Select a Model">

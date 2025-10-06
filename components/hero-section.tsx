@@ -8,8 +8,10 @@ import dashboard_light from "@/public/dashboard-light.png";
 import dashboard_dark from "@/public/dashboard-dark.png";
 
 const menuItems = [
-  { name: "Features", href: "#features" },
-
+  { name: "Assistant", href: "#features" },
+  { name: "Education", href: "#features" },
+  { name: "Health", href: "#features" },
+  { name: "Agriculture", href: "#features" },
 ];
 
 export default function HeroSection() {
@@ -30,7 +32,7 @@ export default function HeroSection() {
                   aria-label="home"
                   className="flex items-center space-x-2"
                 >
-                  <h1 className="text-3xl font-bold">Learna</h1>
+                  <h1 className="text-3xl font-bold">Huma</h1>
                 </Link>
 
                 <button
@@ -82,13 +84,17 @@ export default function HeroSection() {
             <div className="mx-auto max-w-7xl px-6">
               <div className="max-w-3xl text-center sm:mx-auto lg:mr-auto lg:mt-0 lg:w-4/5">
                 <h1 className="mt-8 text-balance text-4xl font-semibold md:text-5xl xl:text-6xl xl:[line-height:1.125]">
-                  Your Smart AI Companion To Learn
+                  Your Smart AI Companion, Anytime, Anywhere
                 </h1>
                 <p className="mx-auto mt-8 hidden max-w-2xl text-wrap text-lg sm:block">
-                Whether you are professionals or students, it combines support and efficiency to make your learning a reality.
+                  Learn, get health guidance, improve farming practices, or ask
+                  anything with AI agents designed to support you in every
+                  aspect of life.
                 </p>
                 <p className="mx-auto mt-6 max-w-2xl text-wrap sm:hidden">
-                Whether you are professionals or students, it combines support and efficiency to make your learning a reality.
+                  Learn, get health guidance, improve farming practices, or ask
+                  anything with AI agents designed to support you in every
+                  aspect of life.
                 </p>
 
                 <div className="mt-8">
@@ -128,7 +134,6 @@ export default function HeroSection() {
             </div>
           </div>
         </section>
-       
       </main>
     </>
   );
