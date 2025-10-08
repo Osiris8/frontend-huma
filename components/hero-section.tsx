@@ -99,10 +99,7 @@ export default function HeroSection() {
 
                 <div className="mt-8">
                   <Button size="lg" asChild>
-                    <Link
-                      href="https://github.com/Osiris8/huma"
-                      target="_blank"
-                    >
+                    <Link href="/login">
                       <Rocket className="relative size-4" />
                       <span className="text-nowrap">Access Now</span>
                     </Link>
