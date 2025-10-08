@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
+import { Loader } from "@/components/prompt-kit/loader";
 import axios from "axios";
 
 export function LoginForm({
@@ -19,8 +20,10 @@ export function LoginForm({
 }: React.ComponentProps<"div">) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const handleLoginForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     const emailError = document.querySelector(".emailError");
     axios({
       method: "POST",
@@ -33,6 +36,7 @@ export function LoginForm({
     })
       .then(function (response) {
         localStorage.setItem("token", response.data.access_token);
+        setIsLoading(false);
         window.location.href = "/dashboard";
       })
       .catch((err) => {
@@ -44,6 +48,17 @@ export function LoginForm({
   };
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
+      <div className="flex justify-center text-2xl font-medium">
+        {isLoading ? (
+          <Loader
+            variant={"text-shimmer"}
+            text={"Connection in progress..."}
+            size={"lg"}
+          />
+        ) : (
+          ""
+        )}
+      </div>
       <Card>
         <CardHeader>
           <CardTitle>Login to your account</CardTitle>

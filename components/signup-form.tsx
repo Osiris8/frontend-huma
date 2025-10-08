@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
+import { Loader } from "@/components/prompt-kit/loader";
 import axios from "axios";
 
 export function SignupForm({
@@ -21,9 +22,10 @@ export function SignupForm({
   const [password, setPassword] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const handleSignupForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    setIsLoading(true);
     const emailError = document.querySelector(
       ".emailError"
     ) as HTMLElement | null;
@@ -40,6 +42,7 @@ export function SignupForm({
       },
     })
       .then(() => {
+        setIsLoading(false);
         window.location.href = "/login";
       })
       .catch((err) => {
@@ -52,6 +55,17 @@ export function SignupForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
+      <div className="flex justify-center text-2xl font-medium">
+        {isLoading ? (
+          <Loader
+            variant={"text-shimmer"}
+            text={"registration in progress..."}
+            size={"lg"}
+          />
+        ) : (
+          ""
+        )}
+      </div>
       <Card>
         <CardHeader>
           <CardTitle>Create your account</CardTitle>

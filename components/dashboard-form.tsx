@@ -132,7 +132,7 @@ export default function PromptInputWithActions() {
 
   return (
     <div className="flex flex-col items-center justify-center mt-20 p-5">
-      <h2 className="text-4xl font-medium mb-5">What do you want to learn ?</h2>
+      <h2 className="text-4xl font-medium mb-5">What do you want to Know ?</h2>
       {isLoading ? (
         <Loader
           variant={"text-shimmer"}
