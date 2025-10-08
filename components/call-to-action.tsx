@@ -13,13 +13,16 @@ export default function CallToAction() {
 
           <div className="mt-12 flex flex-wrap justify-center gap-4">
             <Button asChild size="lg">
-              <Link href="https://github.com/Osiris8/learuma" target="_blank">
+              <Link href="https://github.com/Osiris8/huma" target="_blank">
                 <span>Get Started</span>
               </Link>
             </Button>
 
             <Button asChild size="lg" variant="outline">
-              <Link href="/">
+              <Link
+                href="https://youtu.be/UwMlUeW-IpQ?si=ZW-QhxWPwfX035QF"
+                target="_blank"
+              >
                 <span>Demo</span>
               </Link>
             </Button>
